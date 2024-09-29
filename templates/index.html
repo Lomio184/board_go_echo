@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <style>
+        .content {
+            display: none; /* 내용은 기본적으로 숨김 */
+        }
+    </style>
+</head>
+<body>
+    <h1>게시판</h1>
+    <a href="/new">새 게시글 작성</a>
+    <ul>
+        {{range $index, $post := .posts}}
+        <li>
+            <button onclick="toggleContent('content-{{$index}}')">{{.Title}}</button>
+            <div id="content-{{$index}}" class="content">
+                <p>{{.Content}}</p>
+            </div>
+        </li>
+        {{else}}
+        <p>게시글이 없습니다.</p>
+        {{end}}
+    </ul>
+
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none"|| content.style.display === "") {
+                content.style.display = "block";  
+            } else {
+                content.style.display = "none";  
+            }
+        }
+    </script>
+</body>
+</html>
